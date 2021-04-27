@@ -11,7 +11,7 @@ func _ready():
 	# lb.text = "Hello, World"
 	# add_child(lb)
 
-	print_debug("Hello, World!")
+	print_debug("Hello, World!\nThis is the entry point.")
 	pass # Replace with function body.
 
 

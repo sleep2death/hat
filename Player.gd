@@ -41,8 +41,7 @@ func _physics_process(delta):
 		vel = vel.move_toward(input * MAX_SPEED, ACCELERATION * delta)
 	else:
 		astate.travel("Idle")
-
 		vel = vel.move_toward(Vector2.ZERO, FRICTION * delta)
 
-	# remember the velocity, so the body won't damp
+	# remember the velocity, so the physics body won't damp
 	vel = move_and_slide(vel)

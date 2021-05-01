@@ -14,7 +14,7 @@ extends KinematicBody2D
 #	pass
 
 const ACCELERATION = 300;
-const MAX_SPEED = 75;
+const MAX_SPEED = 60;
 const FRICTION = 500;
 const KEYFRAME_DURATION = 0.1
 
@@ -28,11 +28,9 @@ onready var astate = at.get("parameters/playback") as AnimationNodeStateMachineP
 
 func _ready():
 	createAnimations()
+	
 	# set default animation state
-	var anim = ap.get_animation("Idle_upleft")
-	print(anim.method_track_get_name(1, 0))
 	(at.tree_root as AnimationNodeStateMachine).set_start_node("Idle")
-
 
 enum {
 	MOVE,
@@ -58,6 +56,7 @@ func _physics_process(delta):
 
 func move(delta):
 	if input != Vector2.ZERO:
+		# set all blend_position here:
 		at.set("parameters/Idle/blend_position", input)
 		at.set("parameters/Run/blend_position", input)
 		at.set("parameters/Attack1/blend_position", input)

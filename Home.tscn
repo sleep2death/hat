@@ -1,8 +1,7 @@
-[gd_scene load_steps=63 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://Entry.gd" type="Script" id=1]
 [ext_resource path="res://Bush.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Action RPG Resources/World/GrassBackground.png" type="Texture" id=4]
 [ext_resource path="res://Action RPG Resources/World/DirtTileset.png" type="Texture" id=5]
 [ext_resource path="res://Action RPG Resources/World/CliffTileset.png" type="Texture" id=6]
@@ -570,8 +569,6 @@ format = 1
 tile_data = PoolIntArray( 65538, 0, 0, 65539, 0, 5, 65540, 0, 196609, 65541, 0, 196609, 65542, 0, 7, 131074, 0, 65540, 131075, 0, 131074, 131078, 0, 196612, 131079, 0, 7, 196610, 0, 65539, 196615, 0, 131075, 262146, 0, 65539, 327682, 0, 196612, 327683, 0, 196609, 327684, 0, 196609, 327685, 0, 196609, 327686, 0, 196609, 327687, 0, 196610 )
 
 [node name="YSort" type="YSort" parent="."]
-
-[node name="Player" parent="YSort" instance=ExtResource( 3 )]
 
 [node name="Bush" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 200, 95.9213 )

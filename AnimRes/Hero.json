@@ -16407,7 +16407,23 @@
    { "name": "Run_down", "from": 93, "to": 100, "direction": "forward" },
    { "name": "Run_downleft", "from": 102, "to": 109, "direction": "forward" },
    { "name": "Run_left", "from": 111, "to": 118, "direction": "forward" },
-   { "name": "Run_upleft", "from": 120, "to": 127, "direction": "forward" }
+   { "name": "Run_upleft", "from": 120, "to": 127, "direction": "forward" },
+   { "name": "Attack1_up", "from": 201, "to": 207, "direction": "forward" },
+   { "name": "Attack1_upright", "from": 209, "to": 215, "direction": "forward" },
+   { "name": "Attack1_right", "from": 217, "to": 223, "direction": "forward" },
+   { "name": "Attack1_downright", "from": 225, "to": 231, "direction": "forward" },
+   { "name": "Attack1_down", "from": 233, "to": 239, "direction": "forward" },
+   { "name": "Attack1_downleft", "from": 241, "to": 247, "direction": "forward" },
+   { "name": "Attack1_left", "from": 249, "to": 255, "direction": "forward" },
+   { "name": "Attack1_upleft", "from": 257, "to": 263, "direction": "forward" },
+   { "name": "Attack2_up", "from": 265, "to": 270, "direction": "forward" },
+   { "name": "Attack2_upright", "from": 272, "to": 277, "direction": "forward" },
+   { "name": "Attack2_right", "from": 279, "to": 284, "direction": "forward" },
+   { "name": "Attack2_downright", "from": 286, "to": 291, "direction": "forward" },
+   { "name": "Attack2_down", "from": 293, "to": 298, "direction": "forward" },
+   { "name": "Attack2_downleft", "from": 300, "to": 305, "direction": "forward" },
+   { "name": "Attack2_left", "from": 307, "to": 312, "direction": "forward" },
+   { "name": "Attack2_upleft", "from": 314, "to": 319, "direction": "forward" }
   ]
  }
 }

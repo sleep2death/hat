@@ -13,8 +13,8 @@ extends KinematicBody2D
 #func _process(delta):
 #	pass
 
-const ACCELERATION = 500;
-const MAX_SPEED = 100;
+const ACCELERATION = 300;
+const MAX_SPEED = 75;
 const FRICTION = 500;
 const KEYFRAME_DURATION = 0.1
 
@@ -28,21 +28,40 @@ onready var astate = at.get("parameters/playback") as AnimationNodeStateMachineP
 
 func _ready():
 	createAnimations()
+	# set default animation state
+	var anim = ap.get_animation("Idle_upleft")
+	print(anim.method_track_get_name(1, 0))
 	(at.tree_root as AnimationNodeStateMachine).set_start_node("Idle")
-	# createAnimationBlends()
-	# at.active = true
-	# print(at.get("parameters/playback") == null)
-	# ap.set_current_animation("Idle_right")
-	# ap.play("Idle_back_right")
+
+
+enum {
+	MOVE,
+	ROLL,
+	ATTACK
+}
+
+var state  = MOVE
 
 func _physics_process(delta):
 	input.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	input.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	input = input.normalized()
 
+	match state:
+		MOVE:
+			move(delta)
+		ROLL:
+			pass
+		ATTACK:
+			attack(delta)
+
+
+func move(delta):
 	if input != Vector2.ZERO:
 		at.set("parameters/Idle/blend_position", input)
 		at.set("parameters/Run/blend_position", input)
+		at.set("parameters/Attack1/blend_position", input)
+		at.set("parameters/Attack2/blend_position", input)
 		astate.travel("Run")
 		vel = vel.move_toward(input * MAX_SPEED, ACCELERATION * delta)
 	else:
@@ -51,7 +70,16 @@ func _physics_process(delta):
 
 	# remember the velocity, so the physics body won't damp
 	vel = move_and_slide(vel)
-	print(sprite.frame)
+
+	if Input.is_action_just_pressed("ui_attack"):
+		state = ATTACK
+
+func attack(delta):
+	astate.travel("Attack1")
+
+func animFinished(blender: String):
+	if blender == "Attack1" || blender == "Attack2":
+		state = MOVE
 
 func createAnimations():
 	# read sprite sheet json
@@ -61,33 +89,45 @@ func createAnimations():
 		var tags = json.meta.frameTags
 		for tag in tags:
 			var tag_name = tag.name.split("_")
-			var state = tag_name[0]
+			var blend = tag_name[0]
 			var dir = tag_name[1]
 			
 			# add animation blender to the statemachine
-			if root.get_node(state) == null:
+			if !root.has_node(blend):
 				var n = AnimationNodeBlendSpace2D.new()
-				root.add_node(state, n)
+				root.add_node(blend, n)
 			
-			var blender = root.get_node(state) as AnimationNodeBlendSpace2D
-			print(blender)
+			var blender = root.get_node(blend) as AnimationNodeBlendSpace2D
 			
 			# add animation to player
 			var anim = Animation.new()
 			anim.length = (tag.to - tag.from + 1) * KEYFRAME_DURATION
-			anim.add_track(0)
+			 
+			# add frame track
+			anim.add_track(Animation.TYPE_VALUE, 0)
 			anim.track_set_path(0, "Sprite:frame")
+
+			# add "finish" callback track
+			anim.add_track(Animation.TYPE_METHOD, 1)
+			anim.track_set_path(1, ".:Functions")
+
+			# DO NOT DELETE THIS, use this specific update mode
 			anim.value_track_set_update_mode(0, Animation.UPDATE_DISCRETE)
 			anim.loop = true
 			
-			for t in range(tag.from, tag.to):
-				anim.track_insert_key(0, KEYFRAME_DURATION * (t - tag.from), t)
+			# DO NOT FORGET TO: + 1 frame
+			for t in range(tag.from, tag.to + 1):
+				var time = KEYFRAME_DURATION * (t - tag.from)
+				anim.track_insert_key(0, time, t)
+				if t == tag.to:
+					anim.track_insert_key(1, time, {"method" : "animFinished" , "args" : [blend]})
+
+			# add animation to the player
 			ap.add_animation(tag.name, anim)
 			
 			# add blend point to blender
 			var ana = AnimationNodeAnimation.new()
 			ana.animation = tag.name
-			print(dir)
 			match dir:
 				"up":
 					blender.add_blend_point(ana, Vector2.UP)

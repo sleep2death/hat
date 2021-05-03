@@ -14,21 +14,29 @@ extends KinematicBody2D
 #	pass
 
 const ACCELERATION = 300;
-const MAX_SPEED = 60;
+export var MAX_SPEED = 80;
 const FRICTION = 500;
-const KEYFRAME_DURATION = 0.1
+const KEYFRAME_DURATION = 0.075
 
 var vel = Vector2.ZERO
 var input = Vector2.ZERO;
+var lastNoneZeroInput = Vector2.ZERO
+var currentDirection: float = 0
+var currentBlender: String = ""
 
 onready var sprite = $Sprite as Sprite
 onready var ap = $AnimationPlayer as AnimationPlayer
 onready var at = $AnimationTree as AnimationTree
 onready var astate = at.get("parameters/playback") as AnimationNodeStateMachinePlayback
 
+onready var swordBox = $SwordBox as Area2D
+onready var swordShape = $SwordBox/CollisionShape2D as CollisionShape2D
+
+var inputArr = []
+export var maxInputBuffer: int = 2
+
 func _ready():
 	createAnimations()
-	
 	# set default animation state
 	(at.tree_root as AnimationNodeStateMachine).set_start_node("Idle")
 
@@ -41,45 +49,87 @@ enum {
 var state  = MOVE
 
 func _physics_process(delta):
-	input.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-	input.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-	input = input.normalized()
-
 	match state:
 		MOVE:
 			move(delta)
 		ROLL:
-			pass
+			roll(delta)
 		ATTACK:
 			attack(delta)
 
-
+# move state
 func move(delta):
+	input.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	input.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	input = input.normalized()
+	
 	if input != Vector2.ZERO:
 		# set all blend_position here:
 		at.set("parameters/Idle/blend_position", input)
 		at.set("parameters/Run/blend_position", input)
 		at.set("parameters/Attack1/blend_position", input)
 		at.set("parameters/Attack2/blend_position", input)
+		at.set("parameters/Roll/blend_position", input)
 		astate.travel("Run")
 		vel = vel.move_toward(input * MAX_SPEED, ACCELERATION * delta)
+		
+		# remember last none-zero input 
+		lastNoneZeroInput = input
 	else:
 		astate.travel("Idle")
 		vel = vel.move_toward(Vector2.ZERO, FRICTION * delta)
 
 	# remember the velocity, so the physics body won't damp
+	if Input.is_action_just_pressed("ui_attack"):
+		doAttack()
+		inputArr.append("attack")
+		return
+	
+	if Input.is_action_just_pressed("ui_roll"):
+		doRoll()
+		inputArr.append("roll")
+		return
+	
 	vel = move_and_slide(vel)
 
-	if Input.is_action_just_pressed("ui_attack"):
+
+func doAttack():
 		state = ATTACK
+		# make velocity to 0
+		vel = Vector2.ZERO
+		# calulate sword box rotation
+		swordBox.rotation = lastNoneZeroInput.angle() + (PI * 0.5)
+		astate.travel("Attack1")
 
-func attack(delta):
-	astate.travel("Attack1")
+func attack(_delta):
+		pass
 
-func animFinished(blender: String):
+func doRoll():
+	state = ROLL
+	if input == Vector2.ZERO:
+		input = lastNoneZeroInput
+	astate.travel("Roll")
+
+func roll(delta):
+	vel = vel.move_toward(input * MAX_SPEED, ACCELERATION * delta)
+	vel = move_and_slide(vel)
+	
+func animStarted(blender: String, _direction: String):
 	if blender == "Attack1" || blender == "Attack2":
+		# make the sword collision disabled
+		swordShape.disabled = false
+	if blender == "Roll":
 		state = MOVE
+	# print(blender, ":", direction)
 
+func animFinished(blender: String, _direction: String):
+	if blender == "Attack1" || blender == "Attack2":
+		# swordShape.disabled = true
+		state = MOVE
+	# make the sword collision available
+		swordShape.disabled = true
+
+	
 func createAnimations():
 	# read sprite sheet json
 	var json = readJSON("res://AnimRes/Hero.json")
@@ -118,8 +168,10 @@ func createAnimations():
 			for t in range(tag.from, tag.to + 1):
 				var time = KEYFRAME_DURATION * (t - tag.from)
 				anim.track_insert_key(0, time, t)
+				if t == tag.from:
+					anim.track_insert_key(1, time, {"method" : "animStarted" , "args" : [blend, dir]})
 				if t == tag.to:
-					anim.track_insert_key(1, time, {"method" : "animFinished" , "args" : [blend]})
+					anim.track_insert_key(1, time, {"method" : "animFinished" , "args" : [blend, dir]})
 
 			# add animation to the player
 			ap.add_animation(tag.name, anim)

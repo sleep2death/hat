@@ -16423,7 +16423,15 @@
    { "name": "Attack2_down", "from": 293, "to": 298, "direction": "forward" },
    { "name": "Attack2_downleft", "from": 300, "to": 305, "direction": "forward" },
    { "name": "Attack2_left", "from": 307, "to": 312, "direction": "forward" },
-   { "name": "Attack2_upleft", "from": 314, "to": 319, "direction": "forward" }
+   { "name": "Attack2_upleft", "from": 314, "to": 319, "direction": "forward" },
+   { "name": "Roll_up", "from": 623, "to": 630, "direction": "forward" },
+   { "name": "Roll_upright", "from": 632, "to": 639, "direction": "forward" },
+   { "name": "Roll_right", "from": 641, "to": 648, "direction": "forward" },
+   { "name": "Roll_downright", "from": 650, "to": 657, "direction": "forward" },
+   { "name": "Roll_down", "from": 659, "to": 666, "direction": "forward" },
+   { "name": "Roll_downleft", "from": 668, "to": 675, "direction": "forward" },
+   { "name": "Roll_left", "from": 677, "to": 684, "direction": "forward" },
+   { "name": "Roll_upleft", "from": 686, "to": 693, "direction": "forward" }
   ]
  }
 }

@@ -1,6 +1,6 @@
 extends Node2D
 
-var p = preload("res://Player.tscn")
+var p = preload("res://Scenes/Player.tscn")
 onready var player = p.instance()
 
 func _ready():

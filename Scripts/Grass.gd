@@ -4,7 +4,8 @@ func _ready():
 	pass
 	
 func createGrassEffect():
-		var GrassEffect = preload("res://Effects/GrassEffect.tscn") 
+		var GrassEffect = preload("res://Scenes/GrassEffect.tscn") 
+		var GrassEffect = preload("res://Scenes/GrassEffect.tscn") 
 		var ge = GrassEffect.instance();
 		ge.position = global_position
 

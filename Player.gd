@@ -13,9 +13,9 @@ extends KinematicBody2D
 #func _process(delta):
 #	pass
 
-const ACCELERATION = 300;
+export var ACCELERATION = 300;
 export var MAX_SPEED = 80;
-const FRICTION = 500;
+export var FRICTION = 500;
 const KEYFRAME_DURATION = 0.075
 
 var vel = Vector2.ZERO
@@ -33,10 +33,11 @@ onready var swordBox = $SwordBox as Area2D
 onready var swordShape = $SwordBox/CollisionShape2D as CollisionShape2D
 
 var inputArr = []
-export var maxInputBuffer: int = 2
+var maxInputBuffer: int = 3
 
 func _ready():
 	createAnimations()
+	inputArr.resize(maxInputBuffer)
 	# set default animation state
 	(at.tree_root as AnimationNodeStateMachine).set_start_node("Idle")
 
@@ -64,6 +65,9 @@ func move(delta):
 	input = input.normalized()
 	
 	if input != Vector2.ZERO:
+		# remember last none-zero input 
+		lastNoneZeroInput = input
+
 		# set all blend_position here:
 		at.set("parameters/Idle/blend_position", input)
 		at.set("parameters/Run/blend_position", input)
@@ -72,9 +76,6 @@ func move(delta):
 		at.set("parameters/Roll/blend_position", input)
 		astate.travel("Run")
 		vel = vel.move_toward(input * MAX_SPEED, ACCELERATION * delta)
-		
-		# remember last none-zero input 
-		lastNoneZeroInput = input
 	else:
 		astate.travel("Idle")
 		vel = vel.move_toward(Vector2.ZERO, FRICTION * delta)
@@ -106,29 +107,25 @@ func attack(_delta):
 
 func doRoll():
 	state = ROLL
-	if input == Vector2.ZERO:
-		input = lastNoneZeroInput
+	# input = lastNoneZeroInput
 	astate.travel("Roll")
 
 func roll(delta):
-	vel = vel.move_toward(input * MAX_SPEED, ACCELERATION * delta)
+	vel = vel.move_toward(lastNoneZeroInput * MAX_SPEED, ACCELERATION * delta)
 	vel = move_and_slide(vel)
 	
 func animStarted(blender: String, _direction: String):
 	if blender == "Attack1" || blender == "Attack2":
 		# make the sword collision disabled
 		swordShape.disabled = false
-	if blender == "Roll":
-		state = MOVE
 	# print(blender, ":", direction)
 
 func animFinished(blender: String, _direction: String):
-	if blender == "Attack1" || blender == "Attack2":
+	if blender == "Attack1" || blender == "Attack2" || blender == "Roll":
 		# swordShape.disabled = true
 		state = MOVE
 	# make the sword collision available
 		swordShape.disabled = true
-
 	
 func createAnimations():
 	# read sprite sheet json

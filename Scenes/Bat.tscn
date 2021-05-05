@@ -53,6 +53,7 @@ texture = ExtResource( 1 )
 position = Vector2( 0, -12 )
 frames = SubResource( 6 )
 animation = "Bat"
+frame = 4
 playing = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]

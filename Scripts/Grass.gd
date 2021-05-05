@@ -1,10 +1,6 @@
 extends Node2D
-func _ready():
-	print($HitBox)
-	pass
 	
 func createGrassEffect():
-		var GrassEffect = preload("res://Scenes/GrassEffect.tscn") 
 		var GrassEffect = preload("res://Scenes/GrassEffect.tscn") 
 		var ge = GrassEffect.instance();
 		ge.position = global_position
@@ -13,8 +9,6 @@ func createGrassEffect():
 		world.add_child(ge)
 
 
-func onHitBoxEntered(area: Area2D):
-	if area.name == "SwordBox":
-		print("sword!")
+func onHitBoxEntered(_area: Area2D):
 		createGrassEffect()
 		queue_free()

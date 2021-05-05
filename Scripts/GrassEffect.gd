@@ -1,10 +1,7 @@
 extends Node2D
 
-onready var aSprite :AnimatedSprite = $AnimatedSprite
-
 func _ready():
-	aSprite.play("animate")
-	pass # Replace with function body.
+	$AnimatedSprite.play()
 
-func onAnimFinished():
+func on_animation_finished():
 	queue_free()

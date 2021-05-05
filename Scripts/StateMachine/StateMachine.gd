@@ -4,7 +4,7 @@ extends KinematicBody2D
 # Initializes states and delegates engine callbacks
 # (_physics_process, _unhandled_input) to the state.
 
-var State = preload("./State.gd")
+const State = preload("State.gd")
 
 signal player_state_changed(previous, new)
 

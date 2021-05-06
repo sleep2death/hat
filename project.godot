@@ -14,44 +14,56 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/AsepritePlayer.gd"
 }, {
-"base": "State",
-"class": "AttackState",
+"base": "Node",
+"class": "BatStats",
 "language": "GDScript",
-"path": "res://Scripts/StateMachine/AttackState.gd"
-}, {
-"base": "State",
-"class": "IdleState",
-"language": "GDScript",
-"path": "res://Scripts/StateMachine/IdleState.gd"
-}, {
-"base": "State",
-"class": "RollState",
-"language": "GDScript",
-"path": "res://Scripts/StateMachine/RollState.gd"
-}, {
-"base": "State",
-"class": "RunState",
-"language": "GDScript",
-"path": "res://Scripts/StateMachine/RunState.gd"
+"path": "res://Scripts/BatStats.gd"
 }, {
 "base": "Node",
-"class": "State",
+"class": "FSM",
 "language": "GDScript",
-"path": "res://Scripts/StateMachine/State.gd"
+"path": "res://Core/FSM.gd"
 }, {
-"base": "KinematicBody2D",
-"class": "StateMachine",
+"base": "Node",
+"class": "FSMState",
 "language": "GDScript",
-"path": "res://Scripts/StateMachine/StateMachine.gd"
+"path": "res://Core/FSMState.gd"
+}, {
+"base": "FSMState",
+"class": "PlayerAttack",
+"language": "GDScript",
+"path": "res://Scripts/PlayerAttack.gd"
+}, {
+"base": "FSMState",
+"class": "PlayerMove",
+"language": "GDScript",
+"path": "res://Scripts/PlayerMove.gd"
+}, {
+"base": "FSMState",
+"class": "PlayerRoll",
+"language": "GDScript",
+"path": "res://Scripts/PlayerRoll.gd"
+}, {
+"base": "Node",
+"class": "PlayerStats",
+"language": "GDScript",
+"path": "res://Scripts/PlayerStats.gd"
+}, {
+"base": "Object",
+"class": "Utils",
+"language": "GDScript",
+"path": "res://Core/Utils.gd"
 } ]
 _global_script_class_icons={
 "AsepritePlayer": "",
-"AttackState": "",
-"IdleState": "",
-"RollState": "",
-"RunState": "",
-"State": "",
-"StateMachine": ""
+"BatStats": "",
+"FSM": "",
+"FSMState": "",
+"PlayerAttack": "",
+"PlayerMove": "",
+"PlayerRoll": "",
+"PlayerStats": "",
+"Utils": ""
 }
 
 [application]
@@ -72,6 +84,10 @@ window/stretch/aspect="keep"
 [editor_plugins]
 
 enabled=PoolStringArray(  )
+
+[global]
+
+font=false
 
 [importer_defaults]
 

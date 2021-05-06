@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Action RPG Resources/Shadows/SmallShadow.png" type="Texture" id=1]
 [ext_resource path="res://Action RPG Resources/Enemies/Bat.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/Bat.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/BatStats.gd" type="Script" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -46,6 +47,10 @@ radius = 9.0
 [node name="Bat" type="KinematicBody2D"]
 script = ExtResource( 3 )
 
+[node name="Stats" type="Node" parent="."]
+script = ExtResource( 4 )
+max_hp = 3
+
 [node name="Shadow" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 
@@ -53,7 +58,7 @@ texture = ExtResource( 1 )
 position = Vector2( 0, -12 )
 frames = SubResource( 6 )
 animation = "Bat"
-frame = 4
+frame = 1
 playing = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]
@@ -66,3 +71,5 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2( 0, -15 )
 shape = SubResource( 8 )
+
+[connection signal="area_entered" from="HurtBox" to="." method="on_hurt"]

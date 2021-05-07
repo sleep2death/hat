@@ -16,7 +16,8 @@ func on_hurt(hit_area: Area2D):
 	var dir =  ($HurtBox.global_position - hit_area.global_position).normalized()
 	velocity = dir * knockback_speed
 
-	if hit_area.has("damage"):
+	if hit_area is HitBox:
 		stats.hp -= hit_area.damage
-		if stats.hp == 0:
-			queue_free()
+
+	if stats.hp == 0:
+		queue_free()

@@ -13,7 +13,7 @@ var kinematic_body: KinematicBody2D
 var anim_player: AnimationPlayer
 
 # player's hitbox
-var hit_area: Area2D
+var hit_area: HitBox
 var hit_shape: CollisionShape2D
 
 # player's stats
@@ -34,7 +34,7 @@ func set_fsm(new_value: FSM):
 		kinematic_body = fsm.root
 		anim_player = fsm.root.get_node("AsepritePlayer") as AnimationPlayer
 
-		hit_area = fsm.root.get_node("HitBox") as Area2D
+		hit_area = fsm.root.get_node("HitBox") as HitBox
 		hit_shape = hit_area.get_node("CollisionShape2D") as CollisionShape2D
 
 		stats = fsm.root.get_node("Stats") as PlayerStats

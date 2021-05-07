@@ -170,4 +170,5 @@ ui_roll={
 
 [rendering]
 
+2d/snapping/use_gpu_pixel_snap=true
 environment/defaults/default_environment="res://default_env.tres"

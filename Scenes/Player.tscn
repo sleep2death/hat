@@ -1,64 +1,70 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://AnimRes/Hero.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/PlayerMove.gd" type="Script" id=1]
 [ext_resource path="res://Action RPG Resources/Shadows/SmallShadow.png" type="Texture" id=2]
-[ext_resource path="res://Scripts/StateMachine/StateMachine.gd" type="Script" id=3]
-[ext_resource path="res://Scripts/StateMachine/IdleState.gd" type="Script" id=4]
-[ext_resource path="res://Scripts/StateMachine/RunState.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/HitBox.gd" type="Script" id=3]
+[ext_resource path="res://Core/FSM.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/PlayerAttack.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/AsepritePlayer.gd" type="Script" id=6]
-[ext_resource path="res://Scripts/StateMachine/AttackState.gd" type="Script" id=7]
-[ext_resource path="res://Scripts/StateMachine/RollState.gd" type="Script" id=8]
+[ext_resource path="res://Scripts/PlayerStats.gd" type="Script" id=7]
+[ext_resource path="res://AnimRes/Sprite-0001.png" type="Texture" id=8]
+[ext_resource path="res://Shaders/m_dropshadow_animated.tres" type="Material" id=9]
+[ext_resource path="res://Scripts/AnimatedSpriteShader.gd" type="Script" id=10]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 5.0
+radius = 6.0
 
 [sub_resource type="CircleShape2D" id=2]
+radius = 12.0
 
 [node name="Player" type="KinematicBody2D"]
-script = ExtResource( 3 )
-start_state = NodePath("IdleState")
-anim_player = NodePath("AsepritePlayer")
+
+[node name="Stats" type="Node" parent="."]
+script = ExtResource( 7 )
 
 [node name="Shadow" type="Sprite" parent="."]
+visible = false
 texture = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -9 )
-texture = ExtResource( 1 )
-hframes = 64
-vframes = 32
-frame = 5
+material = ExtResource( 9 )
+position = Vector2( 0, -14 )
+texture = ExtResource( 8 )
+hframes = 32
+vframes = 2
+script = ExtResource( 10 )
 
 [node name="AsepritePlayer" type="AnimationPlayer" parent="."]
 script = ExtResource( 6 )
-json_path = "res://AnimRes/Hero.json"
+json_path = "res://AnimRes/Sprite-0001.json"
 
 [node name="FootCollision" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 1 )
 
 [node name="HitBox" type="Area2D" parent="."]
-position = Vector2( 0, -6 )
+visible = false
+position = Vector2( 0, -12 )
 collision_layer = 0
 collision_mask = 8
+script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2( 0, -16 )
+position = Vector2( 0, -24 )
 shape = SubResource( 2 )
 disabled = true
 
-[node name="IdleState" type="Node" parent="."]
+[node name="FSM" type="Node" parent="."]
 script = ExtResource( 4 )
-anim_speed = 0.5
+initial_state = NodePath("Move")
 
-[node name="RunState" type="Node" parent="."]
+[node name="Move" type="Node" parent="FSM"]
+script = ExtResource( 1 )
+run_speed = 75
+acceleration = 350
+
+[node name="Attack" type="Node" parent="FSM"]
 script = ExtResource( 5 )
-run_speed = 70
-
-[node name="AttackState" type="Node" parent="."]
-script = ExtResource( 7 )
-anim_speed = 1.8
-hit_box = NodePath("../HitBox")
-
-[node name="RollState" type="Node" parent="."]
-script = ExtResource( 8 )
-anim_speed = 1.4
+anim_speed = 1.5
+hit_start_frame = 5
+hit_end_frame = 15

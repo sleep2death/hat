@@ -6,7 +6,7 @@ export (String, FILE, "*.json") var json_path
 
 func _ready():
 	create_animations(json_path)
-	self.current_animation = "Idle_down"
+	self.current_animation = "idle_down"
 
 func create_animations(path: String):
 	# read sprite sheet json

@@ -61,9 +61,9 @@ func play_animation(input):
 		anim = "walk_" + direction	
 		# flip sprite if input is LEFT
 		if input.x < 0:
-			sprite.scale.x = -1
+			sprite.scale.x = -1.0
 		else:
-			sprite.scale.x = 1	
+			sprite.scale.x = 1.0	
 
 	if anim_player.current_animation != anim:
 		anim_player.play(anim, -1, anim_speed)

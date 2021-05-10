@@ -1,0 +1,67 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://TileSet/Desert_Boulder_1x1.png" type="Texture" id=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform float skew_x = 36.0;
+uniform float y_modify = 12.0;
+uniform vec4 modulate : hint_color;
+
+void vertex() {
+	vec2 ps = TEXTURE_PIXEL_SIZE;
+	float newOffset = skew_x * ps.x;
+	
+	VERTEX.x = VERTEX.x * (1.0 + newOffset) - 0.5 * skew_x;
+	VERTEX.y = VERTEX.y;
+	// VERTEX.y = VERTEX.y * (1.0 + newOffset.y);
+}
+void fragment() {
+	vec2 ps = TEXTURE_PIXEL_SIZE;
+	float newOffset = skew_x * ps.x;
+	
+	vec2 newUV;
+	newUV.x = UV.x * (1.0 + newOffset) - newOffset;
+	newUV.y = UV.y;
+	
+	vec4 col = texture(TEXTURE, newUV);
+	
+	float alphaCut = 1.0;
+		
+	if (newUV.x < 0.0 || 
+		newUV.x > 1.0) {
+		alphaCut = 0.0;
+	}
+	
+	vec4 c = vec4(col.rgb, col.a * alphaCut);
+	
+	vec2 skew = vec2(-newOffset * newUV.y  + newOffset, (newUV.y - 1.0) * y_modify * ps.y);
+	vec4 shadow = vec4(modulate.rgb, texture(TEXTURE, newUV + skew).a * modulate.a);
+	
+	alphaCut = 1.0;
+	if (newUV.x < -skew.x || 
+		newUV.x > 1.0 - skew.x ||
+		newUV.y < - skew.y
+		) {
+		alphaCut = 0.0;
+	}
+	vec4 s = vec4(shadow.rgb, shadow.a * alphaCut);
+	
+	// COLOR = s;
+	COLOR = mix(s, c, c.a);
+}
+"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/skew_x = 36.0
+shader_param/y_modify = 12.0
+shader_param/modulate = Color( 0, 0, 0, 0.294118 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 2 )
+texture = ExtResource( 2 )

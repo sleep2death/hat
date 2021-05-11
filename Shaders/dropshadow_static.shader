@@ -8,18 +8,16 @@ uniform vec4 modulate : hint_color;
 
 void vertex() {
 	vec2 ps = TEXTURE_PIXEL_SIZE;
-	float newOffset = skew_x * ps.x;
-	
-	VERTEX.x = VERTEX.x * (1.0 + newOffset) - 0.5 * skew_x;
-	// VERTEX.y = VERTEX.y;
-	// VERTEX.y = VERTEX.y * (1.0 + newOffset.y);
+	float scale_x = skew_x * ps.x;
+	VERTEX.x = VERTEX.x * (1.0 + scale_x) - 0.5 * skew_x;
 }
+
 void fragment() {
 	vec2 ps = TEXTURE_PIXEL_SIZE;
-	float newOffset = skew_x * ps.x;
+	float scale_x = skew_x * ps.x;
 	
 	vec2 newUV;
-	newUV.x = UV.x * (1.0 + newOffset) - newOffset;
+	newUV.x = UV.x * (1.0 + scale_x) - scale_x;
 	newUV.y = UV.y;
 	
 	vec4 col = texture(TEXTURE, newUV);
@@ -32,7 +30,7 @@ void fragment() {
 	
 	vec4 c = vec4(col.rgb, col.a * alphaCut);
 	
-	vec2 skew_uv = vec2( newUV.x + 1.0 * (-newOffset * newUV.y + newOffset * foot_offset),
+	vec2 skew_uv = vec2( newUV.x + scale_x * (-newUV.y + foot_offset),
 	newUV.y * (1.0 + offset_y) - foot_offset * offset_y);
 	
 	vec4 shadow = vec4(modulate.rgb, texture(TEXTURE, skew_uv).a * modulate.a);

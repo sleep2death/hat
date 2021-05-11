@@ -1,0 +1,124 @@
+{ "frames": [
+   {
+    "filename": "front_idle.png",
+    "frame": { "x": 0, "y": 33, "w": 24, "h": 33 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 20, "y": 16, "w": 24, "h": 33 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   {
+    "filename": "front_idle.png",
+    "frame": { "x": 24, "y": 33, "w": 24, "h": 33 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 20, "y": 16, "w": 24, "h": 33 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   {
+    "filename": "front_idle.png",
+    "frame": { "x": 52, "y": 0, "w": 26, "h": 32 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 19, "y": 17, "w": 26, "h": 32 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   {
+    "filename": "front_idle.png",
+    "frame": { "x": 0, "y": 0, "w": 26, "h": 33 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 19, "y": 16, "w": 26, "h": 33 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   {
+    "filename": "side_idle.png",
+    "frame": { "x": 52, "y": 32, "w": 25, "h": 32 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 18, "y": 17, "w": 25, "h": 32 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   {
+    "filename": "side_idle.png",
+    "frame": { "x": 77, "y": 32, "w": 25, "h": 32 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 18, "y": 17, "w": 25, "h": 32 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   {
+    "filename": "side_idle.png",
+    "frame": { "x": 72, "y": 64, "w": 25, "h": 31 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 18, "y": 18, "w": 25, "h": 31 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   {
+    "filename": "side_idle.png",
+    "frame": { "x": 0, "y": 66, "w": 25, "h": 31 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 18, "y": 18, "w": 25, "h": 31 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   {
+    "filename": "back_idle.png",
+    "frame": { "x": 48, "y": 64, "w": 24, "h": 33 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 20, "y": 16, "w": 24, "h": 33 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   {
+    "filename": "back_idle.png",
+    "frame": { "x": 72, "y": 95, "w": 24, "h": 32 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 20, "y": 17, "w": 24, "h": 32 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   {
+    "filename": "back_idle.png",
+    "frame": { "x": 78, "y": 0, "w": 26, "h": 32 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 19, "y": 17, "w": 26, "h": 32 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   {
+    "filename": "back_idle.png",
+    "frame": { "x": 26, "y": 0, "w": 26, "h": 33 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 19, "y": 16, "w": 26, "h": 33 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.2.27-x64",
+  "image": "cadence.png",
+  "format": "RGBA8888",
+  "size": { "w": 104, "h": 127 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "front_idle", "from": 0, "to": 3, "direction": "forward" },
+   { "name": "side_idle", "from": 4, "to": 7, "direction": "forward" },
+   { "name": "back_idle", "from": 8, "to": 11, "direction": "forward" }
+  ]
+ }
+}

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Hero.png-54c1e4065f53c37601ebe47815160e92.stex"
+path="res://.import/cadence.png-8c793175ad7ada32a9cd69b6d108ad48.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Animations/Hero.png"
-dest_files=[ "res://.import/Hero.png-54c1e4065f53c37601ebe47815160e92.stex" ]
+source_file="res://Animations/cadence.png"
+dest_files=[ "res://.import/cadence.png-8c793175ad7ada32a9cd69b6d108ad48.stex" ]
 
 [params]
 

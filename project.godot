@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://Scripts/AnimatedSpriteShader.gd"
 }, {
 "base": "AnimationPlayer",
+"class": "Aseprite",
+"language": "GDScript",
+"path": "res://AsePlayer.gd"
+}, {
+"base": "AnimationPlayer",
 "class": "AsepritePlayer",
 "language": "GDScript",
 "path": "res://Scripts/AsepritePlayer.gd"
@@ -66,6 +71,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "AnimatedSpriteWithDropshadow": "",
+"Aseprite": "",
 "AsepritePlayer": "",
 "BatStats": "",
 "FSM": "",

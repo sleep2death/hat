@@ -9,25 +9,20 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Sprite",
-"class": "AnimatedSpriteWithDropshadow",
-"language": "GDScript",
-"path": "res://Scripts/AnimatedSpriteShader.gd"
-}, {
 "base": "AnimationPlayer",
-"class": "Aseprite",
+"class": "AsePlayer",
 "language": "GDScript",
 "path": "res://AsePlayer.gd"
 }, {
-"base": "AnimationPlayer",
-"class": "AsepritePlayer",
+"base": "Node2D",
+"class": "DropShadowAnimated",
 "language": "GDScript",
-"path": "res://Scripts/AsepritePlayer.gd"
+"path": "res://Scripts/DropShadowAnimated.gd"
 }, {
-"base": "Node",
-"class": "BatStats",
+"base": "Node2D",
+"class": "DropShadowStatic",
 "language": "GDScript",
-"path": "res://Scripts/BatStats.gd"
+"path": "res://Scripts/DropShadowStatic.gd"
 }, {
 "base": "Node",
 "class": "FSM",
@@ -70,10 +65,9 @@ _global_script_classes=[ {
 "path": "res://Core/Utils.gd"
 } ]
 _global_script_class_icons={
-"AnimatedSpriteWithDropshadow": "",
-"Aseprite": "",
-"AsepritePlayer": "",
-"BatStats": "",
+"AsePlayer": "",
+"DropShadowAnimated": "",
+"DropShadowStatic": "",
 "FSM": "",
 "FSMState": "",
 "HitBox": "",
@@ -87,7 +81,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Hat"
-run/main_scene="res://Scenes/World.tscn"
+run/main_scene="res://World.tscn"
 config/icon="res://icon.png"
 
 [display]

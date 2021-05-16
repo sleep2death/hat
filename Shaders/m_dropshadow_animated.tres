@@ -4,12 +4,5 @@
 
 [resource]
 shader = ExtResource( 1 )
-shader_param/skew_x = 0.035
-shader_param/modify_y = 0.3
-shader_param/h_frames = 32
-shader_param/v_frames = 2
-shader_param/coord_h = 0
-shader_param/coord_v = 0
-shader_param/foot_offset = 0.375
-shader_param/scale_x = 1.0
-shader_param/modulate = Color( 0, 0, 0, 0.25098 )
+shader_param/region = null
+shader_param/offset = Vector2( 0.1, 0.1 )

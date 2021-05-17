@@ -59,6 +59,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/PlayerStats.gd"
 }, {
+"base": "TileMap",
+"class": "TileMapTrees",
+"language": "GDScript",
+"path": "res://Scripts/TileMapTrees.gd"
+}, {
 "base": "Object",
 "class": "Utils",
 "language": "GDScript",
@@ -75,6 +80,7 @@ _global_script_class_icons={
 "PlayerMove": "",
 "PlayerRoll": "",
 "PlayerStats": "",
+"TileMapTrees": "",
 "Utils": ""
 }
 
@@ -100,6 +106,8 @@ enabled=PoolStringArray(  )
 [global]
 
 font=false
+Layer=false
+Collision=false
 
 [importer_defaults]
 
@@ -173,6 +181,7 @@ ui_roll={
 2d_physics/layer_2="Player"
 2d_physics/layer_3="HitBox"
 2d_physics/layer_4="HurtBox"
+2d_physics/layer_5="TileMap"
 
 [rendering]
 

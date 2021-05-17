@@ -6,3 +6,4 @@
 shader = ExtResource( 1 )
 shader_param/region = null
 shader_param/offset = Vector2( 0.1, 0.1 )
+shader_param/modulate = Color( 0, 0, 0, 0.470588 )

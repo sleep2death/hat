@@ -10,3 +10,9 @@ enum {
 }
 
 var type = HIT_TYPE_PHY_ATTACK
+
+
+
+func _on_hitbox_body_entered(body):
+	prints("hit", body)
+	# pass # Replace with function body.

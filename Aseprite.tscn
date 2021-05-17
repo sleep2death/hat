@@ -9,17 +9,17 @@
 [ext_resource path="res://Scripts/PlayerStats.gd" type="Script" id=7]
 [ext_resource path="res://Scripts/DropShadowAnimated.gd" type="Script" id=8]
 
-[sub_resource type="CapsuleShape2D" id=8]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 4.0
 height = 8.0
 
-[sub_resource type="CapsuleShape2D" id=7]
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 12.0
 height = 25.0
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
-region = Rect2( 154, 96, 24, 33 )
+region = Rect2( 153.952, 96, 24, 33 )
 margin = Rect2( 52, 48, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=4]
@@ -70,18 +70,18 @@ tracks/2/keys = {
 [node name="foot_collision" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )
 rotation = 1.5708
-shape = SubResource( 8 )
+shape = SubResource( 1 )
 
 [node name="hitbox" type="Area2D" parent="."]
 position = Vector2( 0, -12 )
 collision_layer = 0
-collision_mask = 8
+collision_mask = 24
 script = ExtResource( 2 )
 stats_node = NodePath("../stats")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 position = Vector2( 0, -24 )
-shape = SubResource( 7 )
+shape = SubResource( 2 )
 disabled = true
 
 [node name="display" type="Sprite" parent="."]
@@ -134,3 +134,5 @@ hit_end_frame = 20
 
 [node name="stats" type="Node" parent="."]
 script = ExtResource( 7 )
+
+[connection signal="body_entered" from="hitbox" to="hitbox" method="_on_hitbox_body_entered"]

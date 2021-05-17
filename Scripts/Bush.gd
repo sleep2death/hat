@@ -14,7 +14,6 @@ func on_area_entered(_hb: HitBox):
 func destroy_self():
 	hb.disconnect("area_entered", self, "on_area_entered")
 	$Sprite.queue_free()
-	$DropShadowStatic.queue_free()
 	
 	particles.emitting = true
 	destroying = true

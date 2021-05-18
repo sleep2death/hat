@@ -11,8 +11,13 @@ enum {
 
 var type = HIT_TYPE_PHY_ATTACK
 
-
-
-func _on_hitbox_body_entered(body):
-	prints("hit", body)
-	# pass # Replace with function body.
+func _on_hitbox_body_shape_entered(body_id, body, body_shape, local_shape):
+	var physics := get_world_2d().direct_space_state
+	var query = Physics2DShapeQueryParameters.new()
+	query.set_shape($CollisionShape2D.shape)
+	query.collide_with_areas = true
+	query.transform = $CollisionShape2D.global_transform
+	query.collision_layer = 16
+	var results = physics.intersect_shape(query)
+	# print(results)
+	# print(body, body_shape_owner_id)

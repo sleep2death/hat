@@ -29,7 +29,9 @@ func transition_to(path: NodePath, params):
 	current_state.enter(params)
 	
 	emit_signal("on_state_changed", current_state.name)
-	
+
+func on_global_event(name, args):
+	current_state.on_global_event(name, args)
 	
 func _physics_process(delta):
 	current_state.update(delta)

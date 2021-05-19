@@ -35,14 +35,24 @@ _global_script_classes=[ {
 "path": "res://Core/FSMState.gd"
 }, {
 "base": "Area2D",
-"class": "HitBox",
+"class": "HurtBox",
 "language": "GDScript",
-"path": "res://Scripts/HitBox.gd"
+"path": "res://Scripts/HurtBox.gd"
+}, {
+"base": "FSMState",
+"class": "PeahatGround",
+"language": "GDScript",
+"path": "res://Scripts/PeahatGround.gd"
 }, {
 "base": "FSMState",
 "class": "PlayerAttack",
 "language": "GDScript",
 "path": "res://Scripts/PlayerAttack.gd"
+}, {
+"base": "Area2D",
+"class": "PlayerDetection",
+"language": "GDScript",
+"path": "res://Scripts/PlayerDetection.gd"
 }, {
 "base": "FSMState",
 "class": "PlayerMove",
@@ -55,9 +65,9 @@ _global_script_classes=[ {
 "path": "res://Scripts/PlayerRoll.gd"
 }, {
 "base": "Node",
-"class": "PlayerStats",
+"class": "Stats",
 "language": "GDScript",
-"path": "res://Scripts/PlayerStats.gd"
+"path": "res://Scripts/Stats.gd"
 }, {
 "base": "Object",
 "class": "Utils",
@@ -70,11 +80,13 @@ _global_script_class_icons={
 "DropShadowStatic": "",
 "FSM": "",
 "FSMState": "",
-"HitBox": "",
+"HurtBox": "",
+"PeahatGround": "",
 "PlayerAttack": "",
+"PlayerDetection": "",
 "PlayerMove": "",
 "PlayerRoll": "",
-"PlayerStats": "",
+"Stats": "",
 "Utils": ""
 }
 

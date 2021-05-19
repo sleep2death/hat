@@ -12,12 +12,10 @@ onready var hitbox = get_node(hitbox_node) as Area2D
 onready var hitshape: CollisionShape2D
 
 export (NodePath) var stats_node
-onready var stats = get_node(stats_node) as PlayerStats
+onready var stats = get_node(stats_node) as Stats
 
 export (float, 0.1, 3) var anim_speed = 1.0
 export (int, 100, 600, 1) var deceleration = 300
-
-var fsm: FSM setget set_fsm
 
 # player's physics body
 var kinematic_body: KinematicBody2D
@@ -62,10 +60,12 @@ func enter(params):
 func update(_delta):
 	if frame_count >= hit_start_frame && frame_count < hit_end_frame:
 		hit_collision_query()
+	else:
+		prev_collisions.clear()
 		
 	velocity = velocity.move_toward(Vector2.ZERO, _delta * deceleration)
 	velocity = kinematic_body.move_and_slide(velocity)
-
+	
 	frame_count += 1
 
 func exit():
@@ -96,17 +96,30 @@ var physics: Physics2DDirectSpaceState
 var query = Physics2DShapeQueryParameters.new()
 var bush_particle = preload("res://Scenes/World/BushParticles.tscn")
 
+var prev_collisions: Array = []
+
 func hit_collision_query():
 	query.transform = hitshape.global_transform
-	var res = physics.intersect_shape(query)
+	var res = physics.intersect_shape(query)	
+	
 	for col in res:
 		if col.collider is TileMap:
 			var tm = col.collider as TileMap
 			var local_position = tm.map_to_world(col.metadata)
 			var global_position = tm.to_global(local_position)
-			match tm.tile_set.tile_get_name(col.shape):
+			
+			match tm.tile_set.tile_get_name(tm.get_cellv(col.metadata)):
 				"global_bush":
 					hit_bush(tm, col.metadata, global_position)
+				"grasslands_tree_stump":
+					print("hit stump")
+		elif col.collider is HurtBox:
+			var hb = col.collider as HurtBox
+			if prev_collisions.find(col.collider_id) < 0:
+				hb.on_hurt(stats)
+				prev_collisions.append(col.collider_id)
+		else:
+			prints("unkown collider:", col.collider)
 
 func hit_bush(map, map_pos, global_pos):
 	var p = bush_particle.instance()

@@ -11,10 +11,8 @@ export (float, 0.1, 3) var anim_speed = 1.0
 export (int, 10, 200, 1) var run_speed = 80
 export (int, 100, 600, 1) var acceleration = 300
 
-var fsm: FSM setget set_fsm
 # player's physics body
 var kinematic_body: KinematicBody2D
-
 
 var velocity = Vector2.ZERO
 var direction = "front"
@@ -23,8 +21,7 @@ var last_nonzero_input = Vector2.ZERO
 func set_fsm(new_value: FSM):
 	if fsm != new_value:
 		fsm = new_value
-
-		kinematic_body = fsm.root
+		kinematic_body = fsm.root	
 
 func enter(params):
 	if params && params.has("prev_vel"):

@@ -1,14 +1,17 @@
 extends Area2D
-class_name PlayerDetection
+class_name TargetDetection
 
-var player = null
+var targets = []
+signal targets_changed
 
 func _ready():
-	connect("body_entered", self, "on_body_entered")
-	connect("body_exited", self, "on_body_exited")
-	
+	assert(connect("body_entered", self, "on_body_entered") == OK, "can not connect: body_entered")
+	assert(connect("body_exited", self, "on_body_exited") == OK, "can not connect: body_exited")
+
 func on_body_entered(body):
-	player = body
+	targets.append(body)
+	emit_signal("targets_changed", targets)
 
 func on_body_exited(body):
-	player = body
+	targets.erase(body)
+	emit_signal("targets_changed", targets)

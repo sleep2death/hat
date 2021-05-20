@@ -112,7 +112,7 @@ func hit_collision_query():
 				"global_bush":
 					hit_bush(tm, col.metadata, global_position)
 				"grasslands_tree_stump":
-					print("hit stump")
+					pass
 		elif col.collider is HurtBox:
 			var hb = col.collider as HurtBox
 			if prev_collisions.find(col.collider_id) < 0:

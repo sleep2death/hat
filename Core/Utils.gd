@@ -25,3 +25,19 @@ static func get_direction_rad(name) -> float:
 	var dir = DIRECTIONS.find(name)
 	assert(dir > -1, "wrong direction name " + name)
 	return dir * half_pi
+
+static func find_nearest_target(global_pos: Vector2, targets: Array) -> PhysicsBody2D:
+	if targets.size() == 0:
+		return null
+
+	var nearest_dist = INF
+	var nearest: PhysicsBody2D = null
+	for p in targets:
+		var dist = global_pos.distance_squared_to(p.global_position)
+		if dist < nearest_dist:
+			nearest_dist = dist
+			nearest = p
+		else:
+			continue
+	
+	return nearest

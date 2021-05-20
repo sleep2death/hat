@@ -1,4 +1,4 @@
-class_name PeahatGround
+class_name PeahatJump
 extends FSMState
 
 export (NodePath) var animation_player
@@ -13,7 +13,8 @@ var knockback: Vector2 = Vector2.ZERO
 # player's physics body
 var kinematic_body: KinematicBody2D
 var hurt_box: HurtBox
-var player_detection: TargetDetection
+
+var backwards: bool = false
 
 func set_fsm(new_value: FSM):
 	knockback = Vector2.ZERO
@@ -22,28 +23,41 @@ func set_fsm(new_value: FSM):
 		fsm = new_value
 		kinematic_body = fsm.root
 		hurt_box = fsm.root.get_node("hurt_box") as HurtBox
-		player_detection = fsm.root.get_node("player_detection") as TargetDetection
 
-func enter(_params):
-	anim_player.play("ground", -1, anim_speed)
-	anim_player.shadow.offset = Vector2.ZERO
+func enter(params):
+	if params && params == true:
+		backwards = true
+		anim_player.play("jump", -1, -1.0 * anim_speed, true)
+	else:
+		backwards = false
+		anim_player.play("jump", -1, anim_speed)
+		
+	anim_player.get_animation("jump").loop = false
+	
+	anim_player.shadow.offset.y = 3
+	anim_player.shadow.offset.x = 4
 	
 	assert(hurt_box.connect("on_hurt", self, "on_hurt") == OK)
-	assert(player_detection.connect("targets_changed", self, "on_targets_changed") == OK)
-
+	assert(anim_player.connect("animation_finished", self, "on_anim_finished") == OK, "aseprite player can NOT connect: finished")
 
 func exit():
 	hurt_box.disconnect("on_hurt", self, "on_hurt")
-	player_detection.disconnect("targets_changed", self, "on_targets_changed")
-	
+	anim_player.disconnect("animation_finished", self, "on_anim_finished")
+
 func update(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, delta * deceleration)
 	knockback = kinematic_body.move_and_slide(knockback)
 
+func on_anim_finished(_player):
+	if backwards == true:
+		fsm.transition_to("ground", null)
+	else:
+		fsm.transition_to("fly", null)
+	
 func on_hurt(stats: Stats):
 	var dir: Vector2 = hurt_box.global_position - stats.hitbox.global_position
 	knockback = dir.normalized() * knockback_speed
 
 func on_targets_changed(targets):
 	if targets.size() > 0:
-		fsm.transition_to("jump", null)
+		print("player entered")

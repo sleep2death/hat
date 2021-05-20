@@ -5,8 +5,6 @@ export (float, 0.1, 3) var anim_speed = 1.0
 export (int, 10, 200, 1) var roll_speed = 80
 export (int, 100, 600, 1) var acceleration = 300
 
-var fsm: FSM setget set_fsm
-
 # player's physics body
 var kinematic_body: KinematicBody2D
 

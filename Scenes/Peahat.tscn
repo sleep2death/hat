@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://AsePlayer.gd" type="Script" id=1]
 [ext_resource path="res://Animations/peahat.png" type="Texture" id=2]
@@ -6,29 +6,28 @@
 [ext_resource path="res://Scripts/PeahatGround.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/DropShadowAnimated.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/HurtBox.gd" type="Script" id=6]
-[ext_resource path="res://Scripts/Peahat.gd" type="Script" id=7]
+[ext_resource path="res://Scripts/PeahatJump.gd" type="Script" id=7]
 [ext_resource path="res://Scripts/PlayerDetection.gd" type="Script" id=8]
+[ext_resource path="res://Scripts/PeahatFly.gd" type="Script" id=9]
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=1]
 radius = 6.0
 
-[sub_resource type="AtlasTexture" id=1]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 2 )
 region = Rect2( 101, 81, 22, 20 )
 margin = Rect2( 53, 68, 128, 128 )
 
-[sub_resource type="CircleShape2D" id=4]
-radius = 80.0
-
 [sub_resource type="CircleShape2D" id=3]
+radius = 150.0
+
+[sub_resource type="CircleShape2D" id=4]
 
 [node name="Peahat" type="KinematicBody2D"]
-script = ExtResource( 7 )
-fsm_node = NodePath("fsm")
 
 [node name="foot_collision" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="display" type="Node2D" parent="."]
 
@@ -40,7 +39,7 @@ scale_y = 0.8
 skew_x = 0.8
 
 [node name="body" type="Sprite" parent="display"]
-texture = SubResource( 1 )
+texture = SubResource( 2 )
 centered = false
 offset = Vector2( -64, -82 )
 
@@ -51,20 +50,22 @@ json = "res://Animations/peahat.json"
 shadow_node = NodePath("../display/body_shadow")
 
 [node name="player_detection" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
 script = ExtResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_detection"]
 self_modulate = Color( 1, 1, 1, 0.235294 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
-[node name="hurtbox" type="Area2D" parent="."]
+[node name="hurt_box" type="Area2D" parent="."]
 collision_layer = 8
 collision_mask = 0
 script = ExtResource( 6 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurt_box"]
 position = Vector2( 0, -4 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="fsm" type="Node" parent="."]
 script = ExtResource( 3 )
@@ -73,6 +74,13 @@ initial_state = NodePath("ground")
 [node name="ground" type="Node" parent="fsm"]
 script = ExtResource( 4 )
 animation_player = NodePath("../../ase")
-display_node = NodePath("../../display")
+knockback_speed = 200
 
-[connection signal="on_hurt" from="hurtbox" to="." method="on_hurt"]
+[node name="jump" type="Node" parent="fsm"]
+script = ExtResource( 7 )
+animation_player = NodePath("../../ase")
+anim_speed = 2.0
+
+[node name="fly" type="Node" parent="fsm"]
+script = ExtResource( 9 )
+animation_player = NodePath("../../ase")

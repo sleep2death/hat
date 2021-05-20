@@ -5,7 +5,7 @@
 [ext_resource path="res://Fonts/m3x6.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Assets/Tiles/grasslands_tree_stump.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Tiles/global_bush.png" type="Texture" id=5]
-[ext_resource path="res://trees.tres" type="TileSet" id=6]
+[ext_resource path="res://TS_Static.tres" type="TileSet" id=6]
 [ext_resource path="res://Scenes/Peahat.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Shaders/m_dropshadow_static.tres" type="Material" id=8]
 

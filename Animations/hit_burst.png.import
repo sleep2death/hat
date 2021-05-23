@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Hero.png-54c1e4065f53c37601ebe47815160e92.stex"
+path="res://.import/hit_burst.png-140b669afcc6f63cf471c98c85380500.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Animations/Hero.png"
-dest_files=[ "res://.import/Hero.png-54c1e4065f53c37601ebe47815160e92.stex" ]
+source_file="res://Animations/hit_burst.png"
+dest_files=[ "res://.import/hit_burst.png-140b669afcc6f63cf471c98c85380500.stex" ]
 
 [params]
 

@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends VBoxContainer
 
 var count = 0
 func _physics_process(_delta):

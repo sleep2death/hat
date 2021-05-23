@@ -15,6 +15,17 @@ static func get_direction_name(input) -> String:
 	var rad = input.angle()
 	var deg = -7.5 * sin(rad * 4) + rad2deg(rad) 
 	return DIRECTIONS[int(round(deg / 90)) + 1]
+
+static func get_reversed_direction_name(input: Vector2) -> String:
+	var res = get_direction_name(input)
+	match res:
+		"right": res = "left"
+		"left": res = "right"
+		"front": res = "back"
+		"back": res = "front"
+	
+	return res
+
 	
 static func get_side_direction(name: String) -> String:
 	if name == "left" || name == "right":
@@ -29,7 +40,9 @@ static func get_direction_rad(name) -> float:
 static func find_nearest_target(global_pos: Vector2, targets: Array) -> PhysicsBody2D:
 	if targets.size() == 0:
 		return null
-
+	elif targets.size() == 1:
+		return targets[0]
+	
 	var nearest_dist = INF
 	var nearest: PhysicsBody2D = null
 	for p in targets:

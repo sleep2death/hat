@@ -4,8 +4,10 @@ class_name AsePlayer
 export (String, FILE, "*.json") var json
 export (bool) var draw_shadow = true
 
-export (NodePath) var shadow_node
-onready var shadow: DropShadowAnimated = get_node(shadow_node)
+export (NodePath) var display_node = "../display"
+
+onready var display: Node2D = get_node(display_node)
+onready var shadow: DropShadowAnimated = display.get_node("shadow")
 
 func _ready():
 	var res = read_json(json)
@@ -56,6 +58,11 @@ func _ready():
 	# play("front_idle")
 
 func on_flipped(_is_flipped: bool):
+	if _is_flipped && display.scale.x == 1:
+		display.scale.x = -1
+	elif _is_flipped == false && display.scale.x == -1:
+		display.scale.x = 1
+		
 	if draw_shadow:
 		shadow.update()
 	

@@ -4,13 +4,14 @@ extends Node
 export (bool) var active = true
 
 export (NodePath) var root_node = NodePath("..")
-onready var root = get_node(root_node)
+onready var root := get_node(root_node) as KinematicBody2D
 
 export (NodePath) var initial_state
 
 signal on_state_changed(current)
 
 var current_state: FSMState
+var prev_state: FSMState
 
 func _ready():
 	transition_to(initial_state, null)
@@ -22,6 +23,7 @@ func transition_to(path: NodePath, params):
 	
 	if current_state != null:
 		current_state.exit()
+		prev_state = current_state
 		
 	current_state = next
 	

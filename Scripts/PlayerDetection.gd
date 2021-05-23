@@ -1,17 +1,22 @@
 extends Area2D
 class_name TargetDetection
 
+export (int, 0, 120, 1) var frequency = 30
+var frame_count = 0
+
 var targets = []
 signal targets_changed
 
-func _ready():
-	assert(connect("body_entered", self, "on_body_entered") == OK, "can not connect: body_entered")
-	assert(connect("body_exited", self, "on_body_exited") == OK, "can not connect: body_exited")
-
-func on_body_entered(body):
-	targets.append(body)
-	emit_signal("targets_changed", targets)
-
-func on_body_exited(body):
-	targets.erase(body)
-	emit_signal("targets_changed", targets)
+func _physics_process(_delta):
+	frame_count += 1
+	
+	if frame_count >= frequency:
+		targets = []
+		var bodies := get_overlapping_bodies()
+		for b in bodies:
+			var stats := b.get_node("stats") as Stats
+			if stats.hp > 0:
+				targets.append(b)
+		
+		emit_signal("targets_changed", targets)
+		frame_count = 0

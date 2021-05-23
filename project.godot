@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "AnimatedSprite",
+"class": "AnimatedSpriteAutoFree",
+"language": "GDScript",
+"path": "res://Scripts/AnimatedSpriteAutoFree.gd"
+}, {
 "base": "AnimationPlayer",
 "class": "AsePlayer",
 "language": "GDScript",
@@ -24,10 +29,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/DropShadowStatic.gd"
 }, {
+"base": "FSMState",
+"class": "EntityStateBase",
+"language": "GDScript",
+"path": "res://Scripts/EntityStateBase.gd"
+}, {
 "base": "Node",
 "class": "FSM",
 "language": "GDScript",
 "path": "res://Core/FSM.gd"
+}, {
+"base": "Node",
+"class": "FSMGlobalTransition",
+"language": "GDScript",
+"path": "res://Core/FSMGlobalTransition.gd"
 }, {
 "base": "Node",
 "class": "FSMState",
@@ -180,31 +195,56 @@ _global_script_classes=[ {
 "path": "res://addons/com.gdquest.godot-steering-ai-framework/GSAIUtils.gd"
 }, {
 "base": "Area2D",
+"class": "HitBox",
+"language": "GDScript",
+"path": "res://Scripts/HitBox.gd"
+}, {
+"base": "TextureRect",
+"class": "HudHearts",
+"language": "GDScript",
+"path": "res://Scripts/HudHearts.gd"
+}, {
+"base": "Area2D",
 "class": "HurtBox",
 "language": "GDScript",
 "path": "res://Scripts/HurtBox.gd"
 }, {
-"base": "FSMState",
+"base": "EntityStateBase",
 "class": "PeahatFly",
 "language": "GDScript",
 "path": "res://Scripts/PeahatFly.gd"
 }, {
-"base": "FSMState",
+"base": "EntityStateBase",
 "class": "PeahatGround",
 "language": "GDScript",
 "path": "res://Scripts/PeahatGround.gd"
 }, {
-"base": "FSMState",
+"base": "EntityStateBase",
+"class": "PeahatHurt",
+"language": "GDScript",
+"path": "res://Scripts/PeahatHurt.gd"
+}, {
+"base": "EntityStateBase",
 "class": "PeahatJump",
 "language": "GDScript",
 "path": "res://Scripts/PeahatJump.gd"
 }, {
-"base": "FSMState",
+"base": "EntityStateBase",
 "class": "PlayerAttack",
 "language": "GDScript",
 "path": "res://Scripts/PlayerAttack.gd"
 }, {
-"base": "FSMState",
+"base": "EntityStateBase",
+"class": "PlayerDying",
+"language": "GDScript",
+"path": "res://Scripts/PlayerDying.gd"
+}, {
+"base": "EntityStateBase",
+"class": "PlayerHurt",
+"language": "GDScript",
+"path": "res://Scripts/PlayerHurt.gd"
+}, {
+"base": "EntityStateBase",
 "class": "PlayerMove",
 "language": "GDScript",
 "path": "res://Scripts/PlayerMove.gd"
@@ -230,10 +270,13 @@ _global_script_classes=[ {
 "path": "res://Core/Utils.gd"
 } ]
 _global_script_class_icons={
+"AnimatedSpriteAutoFree": "",
 "AsePlayer": "",
 "DropShadowAnimated": "",
 "DropShadowStatic": "",
+"EntityStateBase": "",
 "FSM": "",
+"FSMGlobalTransition": "",
 "FSMState": "",
 "GSAIAgentLocation": "",
 "GSAIArrive": "",
@@ -264,11 +307,16 @@ _global_script_class_icons={
 "GSAISteeringBehavior": "",
 "GSAITargetAcceleration": "",
 "GSAIUtils": "",
+"HitBox": "",
+"HudHearts": "",
 "HurtBox": "",
 "PeahatFly": "",
 "PeahatGround": "",
+"PeahatHurt": "",
 "PeahatJump": "",
 "PlayerAttack": "",
+"PlayerDying": "",
+"PlayerHurt": "",
 "PlayerMove": "",
 "PlayerRoll": "",
 "Stats": "",
@@ -370,10 +418,11 @@ ui_roll={
 [layer_names]
 
 2d_physics/layer_1="World"
-2d_physics/layer_2="Player"
-2d_physics/layer_3="HitBox"
-2d_physics/layer_4="HurtBox"
-2d_physics/layer_5="TileMap"
+2d_physics/layer_2="TileMap"
+2d_physics/layer_3="Player"
+2d_physics/layer_4="Enemy"
+2d_physics/layer_5="PlayerHurtBox"
+2d_physics/layer_6="EnemyHurtBox"
 
 [rendering]
 

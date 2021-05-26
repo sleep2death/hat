@@ -142,7 +142,8 @@ initial_state = NodePath("move")
 
 [node name="move" type="Node" parent="fsm"]
 script = ExtResource( 5 )
-run_speed = 100
+run_speed = 150
+acceleration = 500
 
 [node name="attack" type="Node" parent="fsm"]
 script = ExtResource( 6 )
@@ -158,3 +159,4 @@ script = ExtResource( 11 )
 
 [node name="stats" type="Node" parent="."]
 script = ExtResource( 7 )
+max_hp = 4

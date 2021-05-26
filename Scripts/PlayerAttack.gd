@@ -81,6 +81,7 @@ func play_animation():
 var physics: Physics2DDirectSpaceState
 var query = Physics2DShapeQueryParameters.new()
 var bush_particle = preload("res://Scenes/World/BushParticles.tscn")
+var lostwoods_bush_particle = preload("res://Scenes/World/LostWoodsBushParticles.tscn")
 
 var prev_collisions: Array = []
 
@@ -96,7 +97,11 @@ func hit_collision_query():
 			
 			match tm.tile_set.tile_get_name(tm.get_cellv(col.metadata)):
 				"global_bush":
-					hit_bush(tm, col.metadata, global_position)
+					hit_bush(tm, col.metadata, global_position, bush_particle)
+				"lostwoods_bush":
+					hit_bush(tm, col.metadata, global_position, lostwoods_bush_particle)
+				"lostwoods_bush_tall":
+					hit_bush(tm, col.metadata, global_position, lostwoods_bush_particle)
 				"grasslands_tree_stump":
 					pass
 				
@@ -109,8 +114,8 @@ func hit_collision_query():
 			pass
 			# prints("unkown collider:", col.collider)
 
-func hit_bush(map, map_pos, global_pos):
-	var p = bush_particle.instance()
+func hit_bush(map, map_pos, global_pos, par):
+	var p = par.instance()
 	p.position = global_pos + Vector2(16, 16)
 	var world = get_tree().current_scene
 	world.add_child(p)

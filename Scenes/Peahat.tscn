@@ -25,41 +25,41 @@ atlas = ExtResource( 2 )
 region = Rect2( 101, 81, 22, 20 )
 margin = Rect2( 53, 68, 128, 128 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 15 )
 region = Rect2( 0, 0, 36, 51 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 15 )
 region = Rect2( 36, 0, 36, 51 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 15 )
 region = Rect2( 72, 0, 36, 51 )
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 15 )
 region = Rect2( 108, 0, 36, 51 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 15 )
 region = Rect2( 144, 0, 36, 51 )
 
-[sub_resource type="SpriteFrames" id=11]
+[sub_resource type="SpriteFrames" id=8]
 animations = [ {
-"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
 "loop": true,
 "name": "default",
 "speed": 15.0
 } ]
 
-[sub_resource type="CircleShape2D" id=3]
-radius = 150.0
+[sub_resource type="CircleShape2D" id=9]
+radius = 125.0
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=10]
 radius = 12.0
 
-[sub_resource type="CircleShape2D" id=5]
+[sub_resource type="CircleShape2D" id=11]
 radius = 8.0
 
 [node name="Peahat" type="KinematicBody2D" groups=[
@@ -89,7 +89,7 @@ offset = Vector2( -64, -82 )
 
 [node name="top" type="AnimatedSprite" parent="display"]
 visible = false
-frames = SubResource( 11 )
+frames = SubResource( 8 )
 offset = Vector2( 0, -22 )
 
 [node name="ase" type="AnimationPlayer" parent="."]
@@ -104,7 +104,7 @@ script = ExtResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_detection"]
 self_modulate = Color( 1, 1, 1, 0.235294 )
-shape = SubResource( 3 )
+shape = SubResource( 9 )
 
 [node name="hurt_box" type="Area2D" parent="."]
 show_behind_parent = true
@@ -114,7 +114,7 @@ script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurt_box"]
 position = Vector2( 0, -4 )
-shape = SubResource( 4 )
+shape = SubResource( 10 )
 
 [node name="hit_box" type="Area2D" parent="."]
 show_behind_parent = true
@@ -125,7 +125,7 @@ stats_node = NodePath("../stats")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hit_box"]
 position = Vector2( 0, -4 )
-shape = SubResource( 5 )
+shape = SubResource( 11 )
 
 [node name="fsm" type="Node" parent="."]
 script = ExtResource( 3 )
@@ -148,6 +148,7 @@ script = ExtResource( 12 )
 
 [node name="stats" type="Node" parent="."]
 script = ExtResource( 10 )
+damage = 2
 max_hp = 2
 
 [node name="debug_draw" type="Node2D" parent="."]

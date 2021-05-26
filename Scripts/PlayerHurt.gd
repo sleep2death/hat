@@ -10,13 +10,12 @@ export (int, 0, 600) var friction = 200
 
 var knock_back: Vector2 = Vector2.ZERO
 
-export (int, 0, 100, 1) var freeze_count = 30 # half second
+export (int, 0, 100, 1) var freeze_count = 40 # half second
 var frame_count := 0
 
 var direction = ""
 
 func enter(from: Stats):
-	.enter(from)
 	if _stats.take_damage(from) == 0:
 		_fsm.transition_to("dying", null)
 		return
@@ -33,7 +32,6 @@ func enter(from: Stats):
 	
 func exit():
 	frame_count = 0
-	.exit()
 	# _hurt_box.set_deferred("monitorable", true)
 
 func update(delta):

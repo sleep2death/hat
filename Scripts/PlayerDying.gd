@@ -2,7 +2,7 @@ extends EntityStateBase
 class_name PlayerDying
 
 # British Engish: Grey; American English: Gray
-onready var filter := get_tree().current_scene.get_node("BackBufferCopy").get_node("GreyFilter") as ColorRect
+onready var filter := get_tree().current_scene.get_node("./CanvasLayer/BackBufferCopy").get_node("GreyFilter") as ColorRect
 
 func enter(_params):
 	_fsm.root.z_index = 2

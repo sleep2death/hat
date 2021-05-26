@@ -43,6 +43,8 @@ func enter(_params):
 func exit():
 	animated_top.playing = false
 	animated_top.visible = false
+	
+	idle_count = 0
 	.exit()
 
 func update(delta):
@@ -51,14 +53,17 @@ func update(delta):
 	_fsm.root.start()
 	if target_player != null:
 		_fsm.root.seek(target_player)
-	
 	_fsm.root.avoid_collision()
 	_fsm.root.group_separation(get_tree().get_nodes_in_group("enemies"))
 	var dir = _fsm.root.finalize()
 	
 	velocity = velocity.move_toward(dir * speed_max, delta * acceleration_max)
 	velocity = _fsm.root.move_and_slide(velocity)
-
+	
+	if target_player == null:
+		idle_count += 1
+		if idle_count > ground_count:
+			_fsm.transition_to("jump", true)
 	
 func on_hurt(from: Stats):
 	_fsm.transition_to("hurt", from)

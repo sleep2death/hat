@@ -1,4 +1,5 @@
 extends KinematicBody2D
+class_name Player
 
 var reflection = preload("res://Scenes/WaterReflection.tscn")
 var water_reflection_ins: WaterReflection

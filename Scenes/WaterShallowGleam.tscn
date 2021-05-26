@@ -10,7 +10,7 @@ particles_anim_loop = false
 
 [sub_resource type="ParticlesMaterial" id=2]
 emission_shape = 2
-emission_box_extents = Vector3( 150, 150, 1 )
+emission_box_extents = Vector3( 100, 100, 1 )
 flag_disable_z = true
 direction = Vector3( 0, 0, 0 )
 spread = 0.0

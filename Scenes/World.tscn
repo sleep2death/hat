@@ -1,0 +1,306 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://Scenes/Aseprite.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/Monitor.gd" type="Script" id=2]
+[ext_resource path="res://Fonts/m3x6.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Assets/Tiles/grasslands_tree_stump.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Tiles/global_bush.png" type="Texture" id=5]
+[ext_resource path="res://Maps/TS_Static.tres" type="TileSet" id=6]
+[ext_resource path="res://Scenes/Peahat.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Shaders/m_dropshadow_static.tres" type="Material" id=8]
+[ext_resource path="res://Scripts/UIHearts.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/Lizafos.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/World/GrassLands_Tiles.tres" type="TileSet" id=11]
+[ext_resource path="res://Assets/Tiles/grasslands_dirt.png" type="Texture" id=12]
+[ext_resource path="res://Scenes/WaterShallowGleam.tscn" type="PackedScene" id=13]
+
+[sub_resource type="TileSet" id=8]
+0/name = "grasslands_dirt.png 0"
+0/texture = ExtResource( 12 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 16, 0, 16, 16 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+1/name = "grasslands_dirt.png 1"
+1/texture = ExtResource( 12 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 0, 0, 16, 16 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+2/name = "grasslands_dirt.png 2"
+2/texture = ExtResource( 12 )
+2/tex_offset = Vector2( 0, 0 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 32, 0, 16, 16 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape_one_way = false
+2/shape_one_way_margin = 0.0
+2/shapes = [  ]
+2/z_index = 0
+3/name = "grasslands_dirt.png 3"
+3/texture = ExtResource( 12 )
+3/tex_offset = Vector2( 0, 0 )
+3/modulate = Color( 1, 1, 1, 1 )
+3/region = Rect2( 48, 0, 16, 16 )
+3/tile_mode = 0
+3/occluder_offset = Vector2( 0, 0 )
+3/navigation_offset = Vector2( 0, 0 )
+3/shape_offset = Vector2( 0, 0 )
+3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+3/shape_one_way = false
+3/shape_one_way_margin = 0.0
+3/shapes = [  ]
+3/z_index = 0
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+points = PoolVector2Array( 20, 8, 24, 12, 24, 12, 24, 20, 20, 24, 12, 24, 8, 20, 8, 12, 12, 8, 12, 8 )
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+points = PoolVector2Array( 28, 8, 32, 16, 32, 24, 20, 28, 12, 28, 0, 24, 0, 16, 4, 8 )
+
+[sub_resource type="TileSet" id=3]
+0/name = "global_bush"
+0/texture = ExtResource( 5 )
+0/tex_offset = Vector2( 0, 0 )
+0/material = ExtResource( 8 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 32, 32 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 1 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 1 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+1/name = "grasslands_tree_stump"
+1/texture = ExtResource( 4 )
+1/tex_offset = Vector2( 0, 4 )
+1/material = ExtResource( 8 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 0, 0, 32, 28 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 4 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 4 )
+1/shape = SubResource( 2 )
+1/shape_one_way = false
+1/shape_one_way_margin = 1.0
+1/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 2 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 4 )
+} ]
+1/z_index = 0
+
+[sub_resource type="Shader" id=4]
+code = "shader_type canvas_item;
+
+uniform float brightness = 1.0;
+uniform float offset = 0.;
+
+void fragment() {
+    vec3 c = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0).rgb;
+	
+	float avg = (c.r + c.g + c.b) / 3.0;
+	avg *= brightness;
+	
+    c.r = mix(c.r, avg, offset);
+	c.g = mix(c.g, avg, offset);
+	c.b = mix(c.b, avg, offset);
+
+    COLOR.rgb = c.rgb;
+}"
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 4 )
+shader_param/brightness = 1.0
+shader_param/offset = 0.0
+
+[sub_resource type="DynamicFont" id=6]
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=7]
+font_data = ExtResource( 3 )
+
+[node name="World" type="Node2D"]
+
+[node name="Water" type="TileMap" parent="."]
+tile_set = ExtResource( 11 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 262151, 1610612770, 0, 262152, 1610612770, 0, 327687, 1610612770, 0, 327688, 1610612770, 0, 393222, 34, 0, 393223, 34, 0, 393224, 34, 0, 393225, -1610612702, 0, 393226, -1610612702, 0, 458758, 34, 0, 458759, 34, 0, 458760, 34, 0, 458761, 34, 0, 458762, 34, 0, 458763, 34, 0, 524295, 34, 0, 524296, -1610612702, 0, 524297, 34, 0, 524298, 34, 0, 524299, 34, 0, 589833, -1610612702, 0, 589834, -1610612702, 0 )
+
+[node name="WaterReflection" type="Node2D" parent="."]
+
+[node name="WaterShallowGleam" parent="." instance=ExtResource( 13 )]
+position = Vector2( 272, 224 )
+
+[node name="Terrain" type="TileMap" parent="."]
+tile_set = ExtResource( 11 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( -65533, 35, 0, -65532, 35, 0, -65531, 35, 0, -65530, 35, 0, -65529, 35, 0, -65528, 35, 0, -65527, 35, 0, -65526, 35, 0, -65525, 35, 0, -65524, 35, 0, -65523, 35, 0, -65522, 35, 0, -65521, 35, 0, -65520, 35, 0, 1, 35, 0, 2, 35, 0, 3, 35, 0, 4, 35, 0, 5, 35, 0, 6, 35, 0, 7, 35, 0, 8, 35, 0, 9, 35, 0, 10, 35, 0, 11, 35, 0, 13, 35, 0, 14, 35, 0, 15, 35, 0, 16, 35, 0, 65538, 35, 0, 65539, 35, 0, 65540, 35, 0, 65541, 35, 0, 65542, 35, 0, 65543, 35, 0, 65544, 35, 0, 65545, 35, 0, 65546, 35, 0, 65547, 35, 0, 65548, 35, 0, 65549, 35, 0, 65550, 35, 0, 65551, 35, 0, 65552, 35, 0, 65553, 35, 0, 65554, 35, 0, 131072, 35, 0, 131073, 35, 0, 131074, 35, 0, 131075, 35, 0, 131076, 35, 0, 131077, 35, 0, 131078, 35, 0, 131079, 35, 0, 131080, 35, 0, 131081, 35, 0, 131082, 35, 0, 131083, 35, 0, 131084, 35, 0, 131085, 35, 0, 131086, 35, 0, 131087, 35, 0, 131088, 35, 0, 131089, 35, 0, 131090, 35, 0, 131091, 35, 0, 196608, 35, 0, 196610, 35, 0, 196611, 35, 0, 196612, 35, 0, 196613, 35, 0, 196614, 35, 0, 196615, 35, 0, 196616, 35, 0, 196617, 35, 0, 196618, 35, 0, 196619, 35, 0, 196620, 35, 0, 196621, 35, 0, 196622, 35, 0, 196623, 35, 0, 196624, 35, 0, 196625, 35, 0, 196626, 35, 0, 196627, 35, 0, 262144, 35, 0, 262145, 35, 0, 262146, 35, 0, 262147, 35, 0, 262148, 35, 0, 262149, 35, 0, 262150, 35, 0, 262151, 1610612750, 0, 262152, 1610612750, 0, 262153, 35, 0, 262154, 35, 0, 262155, 35, 0, 262156, 35, 0, 262157, 35, 0, 262158, 35, 0, 262159, 35, 0, 262160, 35, 0, 262161, 35, 0, 262162, 35, 0, 262163, 35, 0, 262164, 35, 0, 327680, 35, 0, 327681, 35, 0, 327682, 35, 0, 327683, 35, 0, 327684, 35, 0, 327685, 35, 0, 327686, 1610612752, 0, 327689, 1610612753, 0, 327690, 35, 0, 327691, 35, 0, 327692, 35, 0, 327693, 35, 0, 327694, 35, 0, 327695, 35, 0, 327696, 35, 0, 327697, 35, 0, 327698, 35, 0, 327699, 35, 0, 327700, 35, 0, 393217, 35, 0, 393218, 35, 0, 393219, 35, 0, 393220, 35, 0, 393221, 35, 0, 393222, 17, 0, 393225, 1610612754, 0, 393226, 15, 0, 393227, 35, 0, 393228, 35, 0, 393229, 35, 0, 393230, 35, 0, 393231, 35, 0, 393232, 35, 0, 393233, 35, 0, 393234, 35, 0, 393235, 35, 0, 393236, 35, 0, 458753, 35, 0, 458755, 35, 0, 458756, 35, 0, 458757, 35, 0, 458758, 17, 0, 458763, 16, 0, 458764, 35, 0, 458765, 35, 0, 458766, 35, 0, 458767, 35, 0, 458768, 35, 0, 458769, 35, 0, 458770, 35, 0, 458771, 35, 0, 524289, 35, 0, 524290, 35, 0, 524291, 35, 0, 524292, 35, 0, 524293, 35, 0, 524294, 35, 0, 524295, 14, 0, 524296, 1610612757, 0, 524299, 16, 0, 524300, 35, 0, 524301, 35, 0, 524302, 35, 0, 524303, 35, 0, 524304, 35, 0, 524305, 35, 0, 524306, 35, 0, 524307, 35, 0, 589825, 35, 0, 589826, 35, 0, 589827, 35, 0, 589828, 35, 0, 589829, 35, 0, 589830, 35, 0, 589831, 35, 0, 589832, 35, 0, 589833, 14, 0, 589834, 14, 0, 589835, 35, 0, 589836, 35, 0, 589837, 35, 0, 589838, 35, 0, 589839, 35, 0, 589840, 35, 0, 589841, 35, 0, 589842, 35, 0, 655362, 35, 0, 655363, 35, 0, 655364, 35, 0, 655365, 35, 0, 655366, 35, 0, 655367, 35, 0, 655368, 35, 0, 655369, 35, 0, 655370, 35, 0, 655371, 35, 0, 655372, 35, 0, 655373, 35, 0, 655374, 35, 0, 655375, 35, 0, 655376, 35, 0, 655377, 35, 0, 720901, 35, 0, 720902, 35, 0, 720903, 35, 0, 720904, 35, 0, 720905, 35, 0, 720906, 35, 0, 720907, 35, 0, 720908, 35, 0, 720909, 35, 0, 720910, 35, 0, 720911, 35, 0 )
+
+[node name="Terrain_Deco" type="TileMap" parent="."]
+tile_set = SubResource( 8 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 131091, 1610612736, 0, 196633, 1610612738, 0, 196643, 1610612739, 0, 196644, 1610612739, 0, 262175, 1610612739, 0, 262176, 1610612738, 0, 262178, 1610612736, 0, 262179, 1610612739, 0, 327686, 1610612736, 0, 327711, 1610612736, 0, 327715, 1610612736, 0, 393221, 1610612736, 0, 524324, 1610612739, 0, 589859, 1610612738, 0, 589860, 1610612739, 0, 589861, 1610612737, 0, 655396, 1610612736, 0, 720905, 1610612736, 0, 720914, 1610612738, 0, 720919, 1610612736, 0, 720933, 1610612736, 0, 786438, 1610612736, 0, 786465, 1610612738, 0, 786467, 1610612736, 0, 786468, 1610612736, 0, 851986, 1610612738, 0, 851988, 1610612738, 0, 851989, 1610612736, 0, 917511, 1610612736, 0, 917527, 1610612736, 0, 917537, 1610612738, 0, 1179680, 1610612738, 0, 1245210, 1610612737, 0 )
+
+[node name="Game" type="YSort" parent="."]
+
+[node name="Player" parent="Game" instance=ExtResource( 1 )]
+position = Vector2( 344, 72 )
+z_as_relative = false
+collision_mask = 7
+
+[node name="Enemies" type="YSort" parent="Game"]
+
+[node name="Peahat1" parent="Game/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 152, 224 )
+collision_mask = 11
+
+[node name="Peahat2" parent="Game/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 528, 242 )
+collision_mask = 11
+
+[node name="Lizafos1" parent="Game/Enemies" instance=ExtResource( 10 )]
+position = Vector2( 528, 112 )
+collision_mask = 11
+default_facing = "left"
+
+[node name="Lizafos2" parent="Game/Enemies" instance=ExtResource( 10 )]
+position = Vector2( 272, 296 )
+collision_mask = 11
+default_facing = "right"
+
+[node name="Lizafos3" parent="Game/Enemies" instance=ExtResource( 10 )]
+position = Vector2( 200, 102 )
+collision_mask = 11
+
+[node name="Static" type="TileMap" parent="Game"]
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 8, 8 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+cell_tile_origin = 1
+cell_y_sort = true
+centered_textures = true
+cell_clip_uv = true
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( -262114, 1, 0, -262103, 1, 0, -196574, 0, 0, -131034, 1, 0, -131025, 0, 0, -65512, 1, 0, 43, 1, 0, 58, 1, 0, 68, 0, 0, 65555, 0, 0, 65611, 1, 0, 131082, 0, 0, 131097, 1, 0, 131126, 0, 0, 327730, 1, 0, 327753, 1, 0, 458757, 0, 0, 458831, 0, 0, 524301, 1, 0, 851973, 1, 0, 983118, 0, 0, 1179653, 0, 0, 1376302, 1, 0, 1441834, 0, 0, 1507339, 1, 0, 1638402, 1, 0, 1703981, 1, 0, 1835011, 1, 0, 2031625, 0, 0, 2031698, 1, 0, 2162765, 0, 0, 2293763, 0, 0, 2424846, 0, 0, 2555983, 0, 0, 2555985, 1, 0, 2621463, 1, 0, 2621507, 1, 0, 2687048, 0, 0, 2752519, 1, 0, 2752539, 1, 0, 2752569, 0, 0, 2818050, 0, 0, 2818066, 1, 0, 2883595, 1, 0, 2883607, 1, 0, 2883613, 1, 0, 2883648, 1, 0, 2949167, 0, 0, 2949200, 1, 0, 3080245, 1, 0 )
+
+[node name="Destructible" type="TileMap" parent="Game"]
+tile_set = SubResource( 3 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+cell_tile_origin = 1
+cell_y_sort = true
+show_collision = true
+collision_layer = 3
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( -65530, 0, 0, 7, 0, 0, 9, 0, 0, 10, 0, 0, 15, 0, 0, 65539, 0, 0, 65540, 1, 0, 65541, 0, 0, 65551, 0, 0, 65552, 1, 0, 65553, 0, 0, 131074, 1, 0, 131090, 0, 0, 196626, 0, 0, 262146, 0, 0, 262164, 1, 0, 327681, 0, 0, 327682, 0, 0, 327699, 0, 0, 327700, 0, 0, 393217, 1, 0, 393228, 0, 0, 393234, 0, 0, 393235, 0, 0, 393236, 0, 0, 458769, 1, 0, 524289, 1, 0, 524292, 1, 0, 524304, 0, 0, 524305, 0, 0, 589829, 1, 0, 589836, 0, 0, 589839, 0, 0, 655368, 1, 0, 655369, 0, 0, 655370, 0, 0, 655373, 0, 0, 655375, 1, 0, 720898, 1, 0, 720904, 1, 0, 720905, 0, 0, 720906, 1, 0 )
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+z_index = 1
+copy_mode = 2
+rect = Rect2( 0, 0, 640, 360 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="GreyFilter" type="ColorRect" parent="BackBufferCopy"]
+material = SubResource( 5 )
+margin_right = 640.0
+margin_bottom = 360.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="HUD" type="Control" parent="."]
+margin_right = 640.0
+margin_bottom = 360.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Performance" type="VBoxContainer" parent="HUD"]
+margin_left = 4.0
+margin_top = 32.0
+margin_right = 22.0
+margin_bottom = 72.0
+alignment = 2
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FPS" type="Label" parent="HUD/Performance"]
+margin_top = 10.0
+margin_right = 18.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 6 )
+text = "FPS:"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="MEM" type="Label" parent="HUD/Performance"]
+margin_top = 27.0
+margin_right = 18.0
+margin_bottom = 40.0
+custom_fonts/font = SubResource( 7 )
+text = "MEM:"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Hearts" type="HBoxContainer" parent="HUD"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 4.0
+margin_bottom = 4.0
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+player_node = NodePath("../../Game/Player")

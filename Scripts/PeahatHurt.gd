@@ -12,10 +12,15 @@ var knock_back: Vector2 = Vector2.ZERO
 export (int, 0, 100, 1) var freeze_count = 10
 var frame_count := 0
 
+export (NodePath) var animated_top_node = "../../display/top"
+onready var animated_top := get_node(animated_top_node) as AnimatedSprite
+
+var dying := false
+
 func enter(from: Stats):
 	.enter(from)
 	if _stats.take_damage(from) == 0:
-		return on_dying()
+		dying = true
 		
 	# _hurt_box.monitorable = false
 	var dir: Vector2 = (_fsm.root.global_position - from.owner.global_position).normalized()
@@ -26,10 +31,15 @@ func enter(from: Stats):
 	hb.global_position = _hurt_box.global_position
 	
 	get_tree().current_scene.call_deferred("add_child", hb)
+	
+	animated_top.playing = true
+	animated_top.visible = true
 
 func exit():
-	.exit()
+	animated_top.playing = false
+	animated_top.visible = false
 	frame_count = 0
+	.exit()
 
 func on_dying():
 	var ed := enemy_death.instance() as AnimatedSpriteAutoFree
@@ -45,4 +55,6 @@ func update(delta):
 	
 	frame_count += 1
 	if knock_back.length_squared() <= 0.01:
+		if dying:
+			return on_dying()
 		_fsm.transition_to(_fsm.prev_state.name, null)

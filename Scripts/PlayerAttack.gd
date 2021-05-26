@@ -112,7 +112,6 @@ func hit_collision_query():
 func hit_bush(map, map_pos, global_pos):
 	var p = bush_particle.instance()
 	p.position = global_pos + Vector2(16, 16)
-	p.position += Vector2(16, 16)
 	var world = get_tree().current_scene
 	world.add_child(p)
 	

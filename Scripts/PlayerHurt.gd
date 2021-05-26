@@ -1,6 +1,8 @@
 extends EntityStateBase
 class_name PlayerHurt
 
+const hit_burst := preload("res://scenes/HitBurst.tscn")
+
 export (float, 0.1, 3) var anim_speed = 1.0
 
 export (int, 0, 600) var knock_back_speed = 150
@@ -23,6 +25,12 @@ func enter(from: Stats):
 	knock_back = knock_back_speed * dir
 	play_animation(dir)
 	
+	var hb := hit_burst.instance() as AnimatedSpriteAutoFree
+	hb.playing = true
+	hb.global_position = _hurt_box.global_position
+	
+	get_tree().current_scene.call_deferred("add_child", hb)
+	
 func exit():
 	frame_count = 0
 	.exit()
@@ -39,7 +47,6 @@ func update(delta):
 func play_animation(dir: Vector2):
 	var anim = ""	
 	direction = Utils.get_reversed_direction_name(dir)
-	
 	anim = Utils.get_side_direction(direction) + "_hurt"	
 	
 	# flip sprite if input is LEFT

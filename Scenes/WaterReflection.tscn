@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/WaterReflection.gd" type="Script" id=1]
+[ext_resource path="res://Shaders/m_water_reflection.tres" type="Material" id=2]
+
+[node name="reflection" type="Node2D"]
+material = ExtResource( 2 )
+script = ExtResource( 1 )

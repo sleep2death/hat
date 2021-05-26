@@ -4,7 +4,7 @@ extends Node
 export (bool) var active = true
 
 export (NodePath) var root_node = NodePath("..")
-onready var root := get_node(root_node) as KinematicBody2D
+onready var root = get_node(root_node)
 
 export (NodePath) var initial_state
 

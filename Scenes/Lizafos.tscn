@@ -1,0 +1,131 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://Scripts/AsePlayer.gd" type="Script" id=1]
+[ext_resource path="res://Animations/lizafos.png" type="Texture" id=2]
+[ext_resource path="res://Core/FSM.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/LizafosIdle.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/DropShadowAnimated.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/HurtBox.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/LizafosSpearGrab.gd" type="Script" id=7]
+[ext_resource path="res://Scripts/PlayerDetection.gd" type="Script" id=8]
+[ext_resource path="res://Scripts/LizafosSpearMove.gd" type="Script" id=9]
+[ext_resource path="res://Scripts/Stats.gd" type="Script" id=10]
+[ext_resource path="res://Scripts/HitBox.gd" type="Script" id=11]
+[ext_resource path="res://Scripts/LizafosHurt.gd" type="Script" id=12]
+[ext_resource path="res://Scripts/Agent.gd" type="Script" id=13]
+[ext_resource path="res://Scripts/DebugDraw.gd" type="Script" id=14]
+[ext_resource path="res://Scenes/World/DustPoofParticles.tscn" type="PackedScene" id=15]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 120.0
+
+[sub_resource type="CapsuleShape2D" id=3]
+height = 14.0
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 6.0
+
+[sub_resource type="AtlasTexture" id=5]
+resource_local_to_scene = true
+atlas = ExtResource( 2 )
+region = Rect2( 0, 195, 24, 34 )
+margin = Rect2( 52, 48, 128, 128 )
+
+[node name="Lizafos" type="KinematicBody2D" groups=[
+"enemies",
+]]
+collision_layer = 8
+collision_mask = 3
+script = ExtResource( 13 )
+
+[node name="foot_collision" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -2 )
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="player_detection" type="Area2D" parent="."]
+position = Vector2( 0, -10 )
+collision_layer = 0
+collision_mask = 4
+script = ExtResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_detection"]
+self_modulate = Color( 1, 1, 1, 0.235294 )
+shape = SubResource( 6 )
+
+[node name="hurt_box" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurt_box"]
+position = Vector2( 0, -16 )
+shape = SubResource( 3 )
+
+[node name="hit_box" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+stats_node = NodePath("../stats")
+
+[node name="body_collision" type="CollisionShape2D" parent="hit_box"]
+position = Vector2( 0, -14 )
+shape = SubResource( 4 )
+
+[node name="ase" type="AnimationPlayer" parent="."]
+root_node = NodePath("../display")
+script = ExtResource( 1 )
+json = "res://Animations/lizafos.json"
+
+[node name="dust_poof_particles" parent="." instance=ExtResource( 15 )]
+
+[node name="display" type="Node2D" parent="."]
+
+[node name="shadow" type="Node2D" parent="display"]
+script = ExtResource( 5 )
+target_node = NodePath("../body")
+offset = Vector2( 0, -1 )
+scale_y = 0.8
+skew_x = 0.8
+
+[node name="body" type="Sprite" parent="display"]
+texture = SubResource( 5 )
+centered = false
+offset = Vector2( -63, -81 )
+
+[node name="fsm" type="Node" parent="."]
+script = ExtResource( 3 )
+initial_state = NodePath("idle")
+
+[node name="idle" type="Node" parent="fsm"]
+script = ExtResource( 4 )
+
+[node name="spear_grab" type="Node" parent="fsm"]
+script = ExtResource( 7 )
+
+[node name="spear_move" type="Node" parent="fsm"]
+script = ExtResource( 9 )
+
+[node name="hurt" type="Node" parent="fsm"]
+script = ExtResource( 12 )
+
+[node name="stats" type="Node" parent="."]
+script = ExtResource( 10 )
+max_hp = 3
+
+[node name="debug_draw" type="Node2D" parent="."]
+script = ExtResource( 14 )
+interests_color = Color( 0.0509804, 0.780392, 0.321569, 1 )

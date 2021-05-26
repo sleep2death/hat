@@ -1,7 +1,7 @@
 extends Area2D
 class_name TargetDetection
 
-export (int, 0, 120, 1) var frequency = 30
+export (int, 0, 120, 1) var frequency = 15
 var frame_count = 0
 
 var targets = []

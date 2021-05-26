@@ -23,9 +23,12 @@ func enter(_params):
 
 func exit():
 	player_detection.disconnect("targets_changed", self, "on_targets_changed")
+	_fsm.root.water_circle_ins.visible = false
 	.exit()
 	
 func update(delta):
+	_fsm.root.water_circle_ins.visible = true
+	
 	knockback = knockback.move_toward(Vector2.ZERO, delta * deceleration)
 	knockback = _fsm.root.move_and_slide(knockback)
 

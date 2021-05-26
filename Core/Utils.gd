@@ -26,6 +26,25 @@ static func get_reversed_direction_name(input: Vector2) -> String:
 	
 	return res
 
+static func play_animation(player: AsePlayer, anim: String, speed: float = 1.0, direction: String = "", one_shot: bool = false):
+	if direction != "":
+		var face = get_side_direction(direction)
+		
+		if direction == "left" :
+			player.on_flipped(true)
+		else:
+			player.on_flipped(false)
+			
+		anim = face + "_" + anim
+	
+	if one_shot == true:
+		player.get_animation(anim).loop = false
+	else:
+		player.get_animation(anim).loop = true
+	
+	# if speed < 0, play from the end
+	player.play(anim, -1, speed, speed < 0)
+	
 	
 static func get_side_direction(name: String) -> String:
 	if name == "left" || name == "right":
@@ -37,14 +56,14 @@ static func get_direction_rad(name) -> float:
 	assert(dir > -1, "wrong direction name " + name)
 	return dir * half_pi
 
-static func find_nearest_target(global_pos: Vector2, targets: Array) -> PhysicsBody2D:
+static func find_nearest_target(global_pos: Vector2, targets: Array) -> KinematicBody2D:
 	if targets.size() == 0:
 		return null
 	elif targets.size() == 1:
 		return targets[0]
 	
 	var nearest_dist = INF
-	var nearest: PhysicsBody2D = null
+	var nearest: KinematicBody2D = null
 	for p in targets:
 		var dist = global_pos.distance_squared_to(p.global_position)
 		if dist < nearest_dist:

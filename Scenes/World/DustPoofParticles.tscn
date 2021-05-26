@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Assets/global_bush_particles.png" type="Texture" id=1]
-[ext_resource path="res://Scripts/Par_Bush.gd" type="Script" id=2]
+[ext_resource path="res://Assets/dust_poof_particles.png" type="Texture" id=1]
 
 [sub_resource type="CanvasItemMaterial" id=5]
 particles_animation = true
-particles_anim_h_frames = 4
+particles_anim_h_frames = 7
 particles_anim_v_frames = 1
 particles_anim_loop = true
 
@@ -35,7 +34,7 @@ color_ramp = SubResource( 3 )
 anim_offset = 1.0
 anim_offset_random = 1.0
 
-[node name="BushParticles" type="Particles2D"]
+[node name="DustPoofParticles" type="Particles2D"]
 material = SubResource( 5 )
 emitting = false
 amount = 5
@@ -44,4 +43,3 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource( 4 )
 texture = ExtResource( 1 )
-script = ExtResource( 2 )
